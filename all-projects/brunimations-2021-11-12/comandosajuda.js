@@ -1,0 +1,99 @@
+const Discord = require("discord.js");
+const db = require("quick.db");
+exports.run = async (bot, message, args) => {
+  db.add(`xp_${message.author.id}`, 1)
+  let embedP = new Discord.MessageEmbed()
+    .setTitle(`**Central de Ajuda | Brunimations Kingdom**`)
+    .setThumbnail(bot.user.displayAvatarURL({ format: "png", size: 1024 }))
+    .setColor("e7ca4d")
+    .setDescription(`**Lista de Comandos**
+
+👥 | Lista de Comandos para Membros
+🔑 | Lista de Comandos para Moderadores
+AHEWFUDSHDZHFS
+`)
+    .setTimestamp()
+    .setFooter(`Reaja a mensagem com o emoji correspondente.}`,`${message.author.displayAvatarURL({dynamic: true,size: 1024,format: "png"})}`);
+  message.channel.send(embedP).then(msg => {
+    msg.react("👥");
+    msg.react("🔑");
+    msg.react("◀");
+    let filtro1 = (r, u) => r.emoji.name === "👥" && u.id === message.author.id;
+    let coletor1 = msg.createReactionCollector(filtro1);
+    let filtro2 = (r, u) => r.emoji.name === "🔑" && u.id === message.author.id;
+    let coletor2 = msg.createReactionCollector(filtro2);
+    let filtroV = (r, u) => r.emoji.name === "◀" && u.id === message.author.id;
+    let coletorV = msg.createReactionCollector(filtroV);
+    coletor1.on("collect", async (r) => {
+      let embed = new Discord.MessageEmbed()
+        .setTitle("**- Lista de Comandos para Membros**")
+        .setColor("207dec")
+        .setDescription(`**Importante**
+.comandos | Mostra a lista completa de comandos do bot
+.faq | Mostra uma lista de perguntas e respostas frequentes no servidor
+.userinfo | Mostra informações básicas do(a) usuário(a)
+.serverinfo | Mostra informações básicas do servidor
+.servericon | Mostra o ícone do servidor
+
+**Diversão**
+.ping | Mostra o ping do bot
+.avatar <@usuário> | Mostra o avatar de alguém no servidor
+.slap <@usuário>
+.abraçar <@usuário>
+.kiss <@usuário>
+.say <@usuário>
+.mcbody <nickname exato no minecraft>
+.mchead <nickname exato no minecraft>`)
+
+      .setTimestamp()
+      .setFooter("Pressione '◀' para voltar a página principal!")
+      msg.edit(embed)
+      r.users.remove(message.author)
+    });
+    coletor2.on("collect", async (r) => {
+if (!message.member.hasPermission("ADMINISTRADOR")) return message.reply(":x: | Você precisa da permissão `Administrador` para executar esse comando!")
+      let embed = new Discord.MessageEmbed()
+      .setTitle("**Lista de Comandos para Moderadores**")
+      .setColor("f73a49")
+      .setDescription(`**Moderacão**
+.ban <@usuário> | Banir algum membro (permanente)
+.kick <@usuário> | Expulsar algum membro (temporário)
+.clear <quantidade de mensagens> | Limpar determinanda quantidade de mensagens no chat
+
+**Importante**
+.comandos | Mostra a lista completa de comandos do bot
+.faq | Mostra uma lista de perguntas e respostas frequentes no servidor
+.userinfo | Mostra informações básicas do(a) usuário(a)
+.serverinfo | Mostra informações básicas do servidor
+.servericon | Mostra o ícone do servidor
+
+**Diversão**
+.ping | Mostra o ping do bot
+.avatar <@usuário> | Mostra o avatar de alguém no servidor
+.slap <@usuário>
+.abraçar <@usuário>
+.kiss <@usuário>
+.say <@usuário>
+.mcbody <nickname exato no minecraft>
+.mchead <nickname exato no minecraft>
+`)
+
+      .setTimestamp()
+      .setFooter("Pressione '◀' para voltar a página principal!")
+      msg.edit(embed)
+      r.users.remove(message.author)
+    })
+    
+    coletorV.on("collect", async (r) => {
+      msg.edit(embedP)
+      r.users.remove(message.author)
+    })
+  });
+};
+exports.help = {
+  name: `.comandosajuda`
+}
+
+
+
+

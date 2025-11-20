@@ -1,0 +1,33 @@
+{
+  "name": "FIRE BOY SHOP",
+  "version": "1.5.0",
+  "description": "bot discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cpu-stat": "^2.0.1",
+    "discord.js": "^12.2.0",
+    "express": "^4.17.1",
+    "figlet": "^1.4.0",
+    "moment": "^2.26.0",
+    "node-fetch": "^2.6.0",
+    "os": "^0.1.1",
+    "parse-ms": "^2.0.0",
+    "quick.db": "^7.1.1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
+
